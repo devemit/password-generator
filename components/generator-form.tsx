@@ -1,6 +1,7 @@
 'use client';
 import { useState, ChangeEvent } from 'react';
 import { Input } from './ui/input';
+import { Button } from './ui/button';
 import { Label } from './ui/label';
 import { twMerge } from 'tailwind-merge';
 import { RefreshCw } from 'lucide-react';
@@ -75,9 +76,9 @@ export default function Form() {
             value={generatedPassword}
             onChange={generatePassword}
           />
-          <button type='submit' className='px-4 border-none outline-none bg-transparent'>
+          <Button variant='default' type='submit'>
             <RefreshCw size={20} />
-          </button>
+          </Button>
         </div>
       </div>
       <Label className={twMerge('text-[10px] flex lowercase ')}>{passwordStrength}</Label>
