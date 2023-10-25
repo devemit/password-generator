@@ -75,7 +75,7 @@ export default function Form() {
             value={generatedPassword}
             onChange={generatePassword}
           />
-          <button type='submit' className='px-4'>
+          <button type='submit' className='px-4 border-none outline-none bg-transparent'>
             <RefreshCw size={20} />
           </button>
         </div>
