@@ -5,6 +5,9 @@ import { Button } from './ui/button';
 import { Label } from './ui/label';
 import { twMerge } from 'tailwind-merge';
 import { RefreshCw } from 'lucide-react';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { spawn } from 'child_process';
+
 export default function Form() {
   const [passwordLength, setPasswordLength] = useState<number>(5);
   const [generatedPassword, setgeneratedPassword] = useState<string>('Select checkbox!');
@@ -12,6 +15,7 @@ export default function Form() {
   const [useLowerCase, setuseLowerCase] = useState(false);
   const [useNumbers, setuseNumbers] = useState(false);
   const [useCharacters, setuseCharacters] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   type PasswordStrength = 'weak' | 'medium' | 'strong';
   let passwordStrength: PasswordStrength = 'weak';
@@ -21,6 +25,10 @@ export default function Form() {
     passwordStrength = 'medium';
   } else {
     passwordStrength = 'strong';
+  }
+
+  function handleCopyPassword() {
+    setCopied(!copied);
   }
 
   function handleLowerCase() {
@@ -60,6 +68,7 @@ export default function Form() {
       newPassword += allChars[index];
     }
     setgeneratedPassword(newPassword);
+    setCopied(false);
   }
 
   function handleInputChange(e: ChangeEvent<HTMLInputElement>) {
@@ -69,17 +78,23 @@ export default function Form() {
 
   return (
     <form onSubmit={generatePassword} className='flex flex-col'>
-      <div className='flex'>
-        <div className='w-full h-full flex items-center justify-between'>
-          <Input
-            className={twMerge('bg-slate-700 text-slate-100 font-semibold text-xs md:text-sm')}
-            value={generatedPassword}
-            onChange={generatePassword}
-          />
-          <Button variant='default' type='submit'>
-            <RefreshCw size={20} />
-          </Button>
-        </div>
+      <div className='flex items-center justify-evenly'>
+        <Input
+          className={twMerge('bg-slate-700 text-slate-100 font-semibold text-xs md:text-sm')}
+          value={generatedPassword}
+          onChange={generatePassword}
+        />
+        <Button variant='default' type='submit'>
+          <RefreshCw size={20} />
+        </Button>
+        <CopyToClipboard text={generatedPassword}>
+          <div
+            onClick={handleCopyPassword}
+            className=' rounded-md text-slate-900 border-2 px-3 py-[5px] font-semibold border-slate-900 text-xs'
+          >
+            {copied ? <span>copied</span> : <span>copy</span>}
+          </div>
+        </CopyToClipboard>
       </div>
       <Label className={twMerge('text-[10px] flex lowercase ')}>{passwordStrength}</Label>
       <Label className={twMerge('text-xs mt-5')}>
