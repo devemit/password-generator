@@ -6,7 +6,6 @@ import { Label } from './ui/label';
 import { twMerge } from 'tailwind-merge';
 import { RefreshCw } from 'lucide-react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { spawn } from 'child_process';
 
 export default function Form() {
   const [passwordLength, setPasswordLength] = useState<number>(5);
@@ -102,7 +101,7 @@ export default function Form() {
         <Input type='range' min={4} max={12} value={passwordLength} onChange={handleInputChange} />
       </Label>
       <section className='flex flex-col gap-2'>
-        <Label className='flex justify-between text-xs'>
+        <Label className='flex justify-between text-xs md:text-sm lg:text-base'>
           Uppercase
           <input
             type='checkbox'
@@ -111,7 +110,7 @@ export default function Form() {
             className='align-middle cursor-pointer'
           />
         </Label>
-        <Label className='flex justify-between text-xs'>
+        <Label className='flex justify-between text-xs md:text-sm lg:text-base'>
           Lowercase
           <input
             type='checkbox'
@@ -120,7 +119,7 @@ export default function Form() {
             className='align-middle cursor-pointer'
           />
         </Label>
-        <Label className='flex justify-between text-xs'>
+        <Label className='flex justify-between text-xs md:text-sm lg:text-base'>
           Numbers
           <input
             type='checkbox'
@@ -129,7 +128,7 @@ export default function Form() {
             className='align-middle cursor-pointer'
           />
         </Label>
-        <Label className='flex justify-between text-xs'>
+        <Label className='flex justify-between text-xs md:text-sm lg:text-base'>
           Special Chars
           <input
             type='checkbox'
